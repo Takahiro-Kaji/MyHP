@@ -1,46 +1,42 @@
 <template>
-	<div>
-		{{scrollY}}
-	<div id="section-logo">
-		<ul>
-			<li><img src="../assets/test4.png" width="350" height="85" alt=""></li>
-			<li><img src="../assets/test3.png" width="350" height="85" alt=""></li>
-			<li><img src="../assets/test2.png" width="350" height="85" alt=""></li>
-			<li><img src="../assets/test1.png" width="450" height="85" alt=""></li>
-		</ul>
-	</div>
-  <div>
-    <button id="btn">クリックでテキスト挿入</button>
-    <p id="hogehoge"></p>
-  </div>
+<div>
+<div class="box box1">
+  <h2>box1</h2>
+</div><!--box-->
+<div class="box box2">
+  <h2>box2</h2>
+</div><!--box-->
+<div class="box box3">
+  <h2>box3</h2>
+</div><!--box-->
+<div class="box box4">
+  <h2>box4</h2>
+</div>
 	</div>
 </template>
 
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+
+
 <script>
-import $ from "jquery";
+import {$,jQuery} from "jquery";
 
 export default {
 	name: 'test',
 	data(){
 		return{
-		scrollY: 0
 		}
 	},
 	mounted: function() {
-		$('#btn').click(function() {
-      $("#hogehoge").text("テキスト挿入");
-    });
-		var e = window.navigator
-    $("#section-logo ul").stop(!0, !1).animate({
-      top: 85 * (e - 1) - 250
-			}, 1e3, "easeInOutQuad");
-		window.addEventListener('scroll', this.handleScroll)
-  },
-  methods: {
-    handleScroll() {
-      this.scrollY = window.scrollY
-    }
-  }
+		jQuery(function($){
+		var current;
+$.scrollify({section:".box",});
+});
+	}
+	
 }
 
 // とりあえず、これで動いてた
@@ -63,20 +59,26 @@ export default {
 </script>
 
 <style>
-#section-logo{
-	position:absolute;
-	top:100;left:180px;
-	width:450px;
-	height:85px;
-	overflow:hidden;
+*{
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
 }
-
-section #section-logo ul{
-	position:absolute;
-	top:-250px
+.box{
+	color: #fff;
+	height: 100vh;
+	padding: 40px;
 }
-section #section-logo ul li{
-	height:85px;
-	line-height:85px
-	}
+.box1{
+	background: #F43959;
+}
+.box2{
+	background: #4CA4CF;
+}
+.box3{
+	background: #e5cf54;
+}
+.box4{
+	background: #45CB99;
+}
 </style>

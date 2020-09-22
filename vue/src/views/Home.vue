@@ -1,5 +1,4 @@
 <template lang="pug">
-  span {{scrollY}}
     .Home
       .container
         section.area
@@ -38,6 +37,7 @@ export default {
   height: 100vh;
 }
 .area {
+  position: relative;
   scroll-snap-align: start;
   height: 100vh;
 }

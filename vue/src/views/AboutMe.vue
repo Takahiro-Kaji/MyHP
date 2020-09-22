@@ -1,7 +1,15 @@
 <template lang="pug">
   .aboutMe
-    .introduction
-      | 河岡真愛です。山口県出身の22歳です。現在はプログラミング勉強中で、フロントエンドを中心に勉強中です。将来はデザイナーになりたいです。
+    .container
+      section.area
+        .myName
+          | 梶 尚洋｜かじ たかひろ
+      section.area
+        | webページ
+      section.area
+        | ITインフラ
+      section.area
+        | 心理学
 </template>
 
 <script>
@@ -11,7 +19,15 @@ export default {
 </script>
 
 <style>
-.aboutMe {
-  background: rgb(9, 143, 132);
+.container {
+  overflow: auto;
+  scroll-snap-type: y mandatory;
+  height: 100vh;
 }
+.area {
+  position: relative;
+  scroll-snap-align: start;
+  height: 100vh;
+}
+
 </style>

@@ -2,13 +2,13 @@
   .Header
     ul
       li.homeLink(@click="goHome")
-        | あ
+        | Home
       li.aboutMeLink(@click="goAboutMe")
-        | あ
+        | AboutMe
       li.skillsLink(@click="goSkills")
-        | あ
+        | Skills
       li.worksLink(@click="goWorks")
-        | あ
+        | Works
       li.testLink(@click="goTest")
         | Test
 </template>
@@ -39,7 +39,7 @@ export default {
 
 <style lang="scss">
 .Header{
-  background: rgb(171, 250, 243);
+  background: rgba(200, 221, 219, 0.205);
   height: 5vw;
   ul {
     margin: 0;
