@@ -9,6 +9,9 @@ import VueRouter from "vue-router";
 // ルーティング用のファイル（後述）を読みこむ
 import { routes } from "./routes/routes.js";
 
+// jQueryを使えるようにする
+import jQuery from 'jquery'
+
 Vue.component('vue-header',Header)
 Vue.component('vue-footer',Footer)
 
@@ -66,3 +69,8 @@ new Vue({
     router,
     render: h => h(App)
 });
+
+// jQueryを使えるようにする
+global.jquery = jQuery
+global.$ = jQuery
+window.$ = window.jQuery = require('jquery')

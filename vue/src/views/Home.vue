@@ -1,19 +1,33 @@
 <template lang="pug">
-  .Home
-    .container
-      section.area
-        | デザイン
-      section.area
-        | webページ
-      section.area
-        | ITインフラ
-      section.area
-        | 心理学
+  span {{scrollY}}
+    .Home
+      .container
+        section.area
+          | デザイン
+        section.area
+          | webページ
+        section.area
+          | ITインフラ
+        section.area
+          | 心理学
 </template>
 
 <script>
 export default {
-  name: 'Home'
+  name: 'Home',
+  data(){
+    return{
+    scrollY: 0
+    }
+  },
+    mounted() {
+    window.addEventListener('scroll', this.handleScroll)
+  },
+  methods: {
+    handleScroll() {
+      this.scrollY = window.scrollY
+    }
+  }
 }
 </script>
 
@@ -27,4 +41,5 @@ export default {
   scroll-snap-align: start;
   height: 100vh;
 }
+
 </style>

@@ -1,7 +1,7 @@
 <template lang="pug">
   .Header
     ul
-      li.aboutMeLink(@click="goHome")
+      li.homeLink(@click="goHome")
         | あ
       li.aboutMeLink(@click="goAboutMe")
         | あ
@@ -9,6 +9,8 @@
         | あ
       li.worksLink(@click="goWorks")
         | あ
+      li.testLink(@click="goTest")
+        | Test
 </template>
 
 <script>
@@ -26,7 +28,11 @@ export default {
     },
     goWorks(){
       this.$router.push({name: 'Works'});
+    },
+    goTest(){
+      this.$router.push({name: 'test'});
     }
+
   }
 }
 </script>
