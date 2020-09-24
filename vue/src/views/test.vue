@@ -1,82 +1,267 @@
 <template>
-	<div>
-		{{scrollY}}
-	<div id="section-logo">
-		<ul>
-			<li><img src="../assets/test4.png" width="350" height="85" alt=""></li>
-			<li><img src="../assets/test3.png" width="350" height="85" alt=""></li>
-			<li><img src="../assets/test2.png" width="350" height="85" alt=""></li>
-			<li><img src="../assets/test1.png" width="450" height="85" alt=""></li>
-		</ul>
-	</div>
-  <div>
-    <button id="btn">クリックでテキスト挿入</button>
-    <p id="hogehoge"></p>
-  </div>
-	</div>
+<div>
+<div class="fullPageScroll">
+      <section id="section1" class="section section1">
+        <h1>Section 1</h1>
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Asperiores
+          at dolorem, eveniet fugit iste maxime nihil sint. Aperiam dolor in
+          ipsam nesciunt, nihil odio rem, sit suscipit totam velit voluptate?
+        </p>
+      </section>
+      <section id="section2" class="section section2">
+        <div class="imageWrapper">
+          <img src="../assets/logo.png" alt="" width="800" height="534" />
+        </div>
+        <h1>Tokyo Gate Bridge by SONY a7R3</h1>
+      </section>
+      <section id="section3" class="section section3">
+        <h1>Section 3</h1>
+        <div class="innerScroll">
+          <p>
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Asperiores
+            at dolorem, eveniet fugit iste maxime nihil sint. Aperiam dolor in
+            ipsam nesciunt, nihil odio rem, sit suscipit totam velit voluptate?
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+            Dignissimos distinctio eius laborum laudantium optio qui vero. A
+            aspernatur cupiditate dolore enim ipsam magni necessitatibus nemo
+            quae, repudiandae rerum soluta voluptatum.
+          </p>
+          <p>
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad animi
+            asperiores consequatur cum deserunt, dignissimos ea excepturi fugiat
+            id in labore libero odit quasi quis quisquam quo quod sint voluptas.
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Asperiores
+            at dolorem, eveniet fugit iste maxime nihil sint. Aperiam dolor in
+            ipsam nesciunt, nihil odio rem, sit suscipit totam velit voluptate?
+          </p>
+          <p>
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+            Dignissimos omnis, repudiandae! At atque aut deserunt facilis fugit
+            hic ipsa labore molestiae nemo numquam placeat provident quidem quos
+            repellendus reprehenderit, sit. Lorem ipsum dolor sit amet,
+            consectetur adipisicing elit. Asperiores at dolorem, eveniet fugit
+            iste maxime nihil sint. Aperiam dolor in ipsam nesciunt, nihil odio
+            rem, sit suscipit totam velit voluptate?
+          </p>
+          <p>
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolorem
+            incidunt nam sint ullam. Beatae consequuntur placeat saepe ullam
+            vero. Assumenda aut autem dolor enim optio repellat sunt. Facere
+            laboriosam, quo? Lorem ipsum dolor sit amet, consectetur adipisicing
+            elit. Asperiores, quas unde. At, blanditiis dicta dolore doloribus,
+            exercitationem facilis fugiat inventore ipsam libero, maiores
+            officiis praesentium quae ratione rem repellat vitae? Lorem ipsum
+            dolor sit amet, consectetur adipisicing elit. Asperiores at dolorem,
+            eveniet fugit iste maxime nihil sint. Aperiam dolor in ipsam
+            nesciunt, nihil odio rem, sit suscipit totam velit voluptate?
+          </p>
+          <p>
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. At cumque
+            doloremque laudantium neque obcaecati saepe tempora, temporibus
+            voluptate? Corporis culpa illum incidunt, ipsum obcaecati officiis
+            quae quaerat qui reiciendis sunt. Lorem ipsum dolor sit amet,
+            consectetur adipisicing elit. Asperiores at dolorem, eveniet fugit
+            iste maxime nihil sint. Aperiam dolor in ipsam nesciunt, nihil odio
+            rem, sit suscipit totam velit voluptate?
+          </p>
+        </div>
+      </section>
+      <section id="section4" class="section section4">
+        <iframe
+          width="560"
+          height="315"
+          src="https://www.youtube.com/embed/Vk6rbXQK7Qc"
+          frameborder="0"
+          allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen
+        ></iframe>
+      </section>
+      <section id="section5" class="section section5">
+        <h1>Section 5</h1>
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Asperiores
+          at dolorem, eveniet fugit iste maxime nihil sint. Aperiam dolor in
+          ipsam nesciunt, nihil odio rem, sit suscipit totam velit voluptate?
+        </p>
+      </section>
+    </div>
+    <nav id="pagination" class="pagination">
+      <a id="pagination1" href="#section1"></a>
+      <a id="pagination2" href="#section2"></a>
+      <a id="pagination3" href="#section3"></a>
+      <a id="pagination4" href="#section4"></a>
+      <a id="pagination5" href="#section5"></a>
+    </nav>
+		</div>
 </template>
 
 <script>
-import $ from "jquery";
 
 export default {
 	name: 'test',
 	data(){
 		return{
-		scrollY: 0
 		}
 	},
-	mounted: function() {
-		$('#btn').click(function() {
-      $("#hogehoge").text("テキスト挿入");
-    });
-		var e = window.navigator
-    $("#section-logo ul").stop(!0, !1).animate({
-      top: 85 * (e - 1) - 250
-			}, 1e3, "easeInOutQuad");
-		window.addEventListener('scroll', this.handleScroll)
-  },
-  methods: {
-    handleScroll() {
-      this.scrollY = window.scrollY
-    }
-  }
+	mounted : function(){
+		const paginations = document.querySelectorAll(".pagination a");
+		paginations.forEach(pagination => {
+			pagination.addEventListener("click", e => {
+			e.preventDefault();
+			const targetId = e.target.hash;
+			const target = document.querySelector(targetId);
+			target.scrollIntoView({ behavior: "smooth" });
+			});
+		});
+
+// Intersection Observer
+		const sections = document.querySelectorAll(".section");
+		const observerRoot = document.querySelector(".fullPageScroll");
+		const options = {
+			root: observerRoot,
+			rootMargin: "-50% 0px",
+			threshold: 0
+		};
+		const observer = new IntersectionObserver(doWhenIntersect, options);
+		sections.forEach(section => {
+			observer.observe(section);
+		});
+
+		/**
+		 * 交差したときに呼び出す関数
+		 * @param entries - IntersectionObserverEntry IntersectionObserverが交差したときに渡されるオブジェクトです。
+		 */
+		function doWhenIntersect(entries) {
+			entries.forEach(entry => {
+				if (entry.isIntersecting) {
+					activatePagination(entry.target);
+				}
+			});
+		}
+
+		/**
+		 * ページネーションの大きさを変える関数
+		 * @param element - HTMLElement 現在表示中のスライドのHTML要素を引数に取ります。
+		 */
+		function activatePagination(element) {
+			const currentActiveIndex = document.querySelector("#pagination .active");
+			if (currentActiveIndex !== null) {
+				currentActiveIndex.classList.remove("active");
+			}
+			const newActiveIndex = document.querySelector(`a[href='#${element.id}']`);
+			newActiveIndex.classList.add("active");
+		}
+	}
 }
-
-// とりあえず、これで動いてた
-// function() {
-//     var e = window.navigator
-//             $("#section-logo ul").stop(!0, !1).animate({
-//                 top: 85 * (e - 1) - 250
-//             }, 1e3, "easeInOutQuad", fcunction() {}),
-// 1e3=>https://www.webopixel.net/javascript/940.html
-// easeInOutQuad=>https://easings.net/ja
-
-
-//         $("#section-logo").on({
-//             mouseenter: function(e) {},
-//             mouseleave: function(e) {},
-//             click: function(e) {
-//                 f(b[l])
-//             }
-//         })
 </script>
 
 <style>
-#section-logo{
-	position:absolute;
-	top:100;left:180px;
-	width:450px;
-	height:85px;
-	overflow:hidden;
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
 }
 
-section #section-logo ul{
-	position:absolute;
-	top:-250px
+h1 {
+	margin-bottom: 1.8em;
 }
-section #section-logo ul li{
-	height:85px;
-	line-height:85px
-	}
+
+p {
+	margin-bottom: 2em;
+}
+
+.fullPageScroll {
+	width: 100%;
+	height: 100vh;
+	scroll-snap-type: y mandatory;
+	overflow-y: auto;
+	-webkit-overflow-scrolling: touch;
+}
+
+.section {
+	width: 100%;
+	height: 100vh;
+	padding: 10%;
+	scroll-snap-align: start;
+}
+
+.section1 {
+	background-color: #ffba49;
+}
+
+.section2 {
+	background-color: #212124;
+	position: relative;
+}
+
+.imageWrapper{
+	width: 100%;
+	height: 100%;
+	overflow: hidden;
+	position: relative;
+}
+
+.section2 img {
+	display: block;
+	position: absolute;
+	width: 100%;
+	height: auto;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+}
+
+.section2 h1 {
+	position: absolute;
+	left: 0;
+	top: 88%;
+	width: 100%;
+	color: #ffffff;
+	text-align: center;
+}
+
+.section3 {
+	background-color: #ef5b5b;
+}
+
+.section3 .innerScroll {
+	height: 80%;
+	overflow-y: scroll;
+}
+
+.section4 {
+	background-color: #a4a9ad;
+	padding: 0;
+}
+
+.section4 iframe {
+	width: 100%;
+	height: 100%;
+}
+
+.section5 {
+	background-color: #20a39e;
+}
+
+.pagination {
+	position: fixed;
+	top: 50%;
+	right: 32px;
+	transform: translateY(-50%);
+}
+
+.pagination a {
+	display: block;
+	width: 12px;
+	height: 12px;
+	margin: 24px 0;
+	border-radius: 50%;
+	background-color: #fcfcfc;
+	transition: transform 0.2s;
+}
+
+.pagination a.active {
+	transform: scale(1.8);
+}
 </style>
