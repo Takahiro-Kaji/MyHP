@@ -39,8 +39,13 @@ export default {
 
 <style lang="scss">
 .Header{
-  background: rgb(171, 250, 243);
-  height: 5vw;
+  position: fixed;
+  top: 20px;
+  left: 0;
+  width: 100%;
+  height: 95px;
+  font-size: 12px;
+  z-index: 100;
   ul {
     margin: 0;
     li {

@@ -4,7 +4,6 @@
         <div class="container">
           <router-view/>
         </div>
-        <vue-footer/>
     </div>
 </template>
 

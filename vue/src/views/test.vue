@@ -1,6 +1,6 @@
 <template>
 <div>
-<div class="fullPageScroll">
+		<div class="fullPageScroll">
       <section id="section1" class="section section1">
         <h1>Section 1</h1>
         <p>
@@ -106,6 +106,19 @@ export default {
 	},
 	mounted : function(){
 		/**
+		 * セクションの表示を浮いて出るようにする
+		 * @param element - HTMLElement 現在表示中のスライドのHTML要素を引数に取ります。
+		 */
+		function activateSection(element) {
+			const currentActiveIndex = document.querySelector(".fullPageScroll .activeSection");
+			if (currentActiveIndex !== null) {
+				currentActiveIndex.classList.remove("activeSection");
+			}
+			const newActiveIndex = document.querySelector(`section[id='${element.id}']`);
+			newActiveIndex.classList.add("activeSection");
+		}
+
+		/**
 		 * ページネーションのボタンをクリックした時に各セクションに飛ぶ関数
 		 * @param 
 		 */
@@ -149,6 +162,7 @@ export default {
 			entries.forEach(entry => {
 				if (entry.isIntersecting) {
 					activatePagination(entry.target);
+					activateSection(entry.target);
 				}
 			});
 		}
@@ -208,12 +222,12 @@ p {
 	position: relative;
 }
 
-.imageWrapper{
+/* .imageWrapper{
 	width: 100%;
 	height: 100%;
 	overflow: hidden;
 	position: relative;
-}
+} */
 
 .section2 img {
 	display: block;
@@ -276,5 +290,47 @@ p {
 
 .pagination a.active {
 	transform: scale(1.8);
+}
+
+/* アニメーションについて
+https://www.webcreatorbox.com/tech/css3-animation-colour */
+@-webkit-keyframes bg-color {
+	0% {opacity: 0} /*アニメーション開始時は不透明度0%*/
+	20% {opacity: 0}
+  100% {opacity: 1} /*アニメーション終了時は不透明度100%*/
+  /* 0% { color: #e74c3c; }
+  20% { color: #f1c40f; }
+  40% { color: #1abc9c; }
+  60% { color: #3498db; }
+  80% { color: #9b59b6; }
+  100% { color: #e74c3c; } */
+}
+@keyframes bg-color {
+	0% {
+		opacity: 0;
+		transform: translate3d(0, -20px, 0);
+	} /*アニメーション開始時は不透明度0%*/
+	20% {
+		opacity: 0;
+		transform: translate3d(0, -20px, 0);
+	} /*アニメーション開始時は不透明度0%*/
+
+  100% {
+		opacity: 1;
+		transform: translate3d(0, 0, 0);
+		} /*アニメーション終了時は不透明度100%*/
+  /* 0% { color: #e74c3c; }
+  20% { color: #f1c40f; }
+  40% { color: #1abc9c; }
+  60% { color: #3498db; }
+  80% { color: #9b59b6; }
+  100% { color: #e74c3c; } */
+}
+.activeSection h1{
+  animation: bg-color 1.5s;
+  -webkit-animation: bg-color 1.5s;
+}
+.activeSection p{
+	animation: fadeIn 0.2s ease 0.3s 1 normal;
 }
 </style>
