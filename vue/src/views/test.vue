@@ -105,14 +105,27 @@ export default {
 		}
 	},
 	mounted : function(){
+		/**
+		 * ページネーションのボタンをクリックした時に各セクションに飛ぶ関数
+		 * @param 
+		 */
 		const paginations = document.querySelectorAll(".pagination a");
 		paginations.forEach(pagination => {
 			pagination.addEventListener("click", e => {
-			e.preventDefault();
-			const targetId = e.target.hash;
-			const target = document.querySelector(targetId);
-			target.scrollIntoView({ behavior: "smooth" });
-			});
+				// クリック時のデフォルトの挙動ではなく、指定した挙動を行うように指定している
+				// https://qiita.com/tochiji/items/4e9e64cabc0a1cd7a1ae
+				e.preventDefault();
+				// hashはHTML要素のIDをとってくるプロパティの指定の仕方っぽい
+				const targetId = e.target.hash;
+				// 
+				// https://wp-p.info/tpl_rep.php?cat=js-intermediate&fl=r4
+				const target = document.querySelector(targetId);
+				console.log(targetId);
+				console.log(target);
+				target.scrollIntoView({ behavior: "smooth" });
+				},
+			{passive: false}
+			);
 		});
 
 // Intersection Observer
