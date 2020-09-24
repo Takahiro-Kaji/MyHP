@@ -1,8 +1,16 @@
 <template>
 <div>
+	<!-- ここにh1を持ってきてabsoluteで固定して
+	アニメーションで回ってるように見せる -->
+	<div id="sectionLogos">
+		<h1 id="section1Logo" class="nonActiveSection nonSection">Section 1</h1>
+		<h1 id="section2Logo" class="nonSection">Tokyo Gate Bridge by SONY a7R3</h1>
+		<h1 id="section3Logo" class="nonSection">Section 3</h1>
+		<h1 id="section5Logo" class="nonSection">Section 5</h1>
+	</div>
 	<div class="fullPageScroll">
 		<section id="section1" class="section section1">
-			<h1>Section 1</h1>
+			
 			<p>
 				Lorem ipsum dolor sit amet, consectetur adipisicing elit. Asperiores
 				at dolorem, eveniet fugit iste maxime nihil sint. Aperiam dolor in
@@ -13,10 +21,10 @@
 			<div class="imageWrapper">
 				<img src="../assets/logo.png" alt="" width="800" height="534" />
 			</div>
-			<h1>Tokyo Gate Bridge by SONY a7R3</h1>
+			
 		</section>
 		<section id="section3" class="section section3">
-			<h1>Section 3</h1>
+			
 			<div class="innerScroll">
 				<p>
 					Lorem ipsum dolor sit amet, consectetur adipisicing elit. Asperiores
@@ -78,7 +86,7 @@
 			></iframe>
 		</section>
 		<section id="section5" class="section section5">
-			<h1>Section 5</h1>
+			
 			<p>
 				Lorem ipsum dolor sit amet, consectetur adipisicing elit. Asperiores
 				at dolorem, eveniet fugit iste maxime nihil sint. Aperiam dolor in
@@ -102,19 +110,28 @@ export default {
 	name: 'test',
 	data(){
 		return{
+			currentSection:null,
 		}
 	},
 	mounted : function(){
-		/**
+		/**	<div id="sectionLogo">
+		<h1 id="pagLogo1">Section 1</h1>
+		<h1 id="pagLogo2">Tokyo Gate Bridge by SONY a7R3</h1>
+		<h1 id="pagLogo3">Section 3</h1>
+		<h1 id="pagLogo5">Section 5</h1>
+	</div>
 		 * セクションの表示を浮いて出るようにする
 		 * @param element - HTMLElement 現在表示中のスライドのHTML要素を引数に取ります。
 		 */
 		function activateSection(element) {
-			const currentActiveIndex = document.querySelector(".fullPageScroll .activeSection");
+			const currentActiveIndex = document.querySelector("#sectionLogos .activeSection");
 			if (currentActiveIndex !== null) {
 				currentActiveIndex.classList.remove("activeSection");
+				currentActiveIndex.classList.add("nonActiveSection");
 			}
-			const newActiveIndex = document.querySelector(`section[id='${element.id}']`);
+			const logoId = element.id + "Logo";
+			const newActiveIndex = document.querySelector(`h1[id='${logoId}']`);
+			newActiveIndex.classList.remove("nonActiveSection");
 			newActiveIndex.classList.add("activeSection");
 		}
 
@@ -133,8 +150,6 @@ export default {
 				// 
 				// https://wp-p.info/tpl_rep.php?cat=js-intermediate&fl=r4
 				const target = document.querySelector(targetId);
-				console.log(targetId);
-				console.log(target);
 				target.scrollIntoView({ behavior: "smooth" });
 				},
 			{passive: false}
@@ -292,27 +307,28 @@ p {
 	transform: scale(1.8);
 }
 
+.nonSection {
+	
+	opacity: 0;
+	position: fixed;
+  top: 20px;
+  left: 0;
+  width: 100%;
+  height: 95px;
+  font-size: 20px;
+  z-index: 100;
+}
 /* アニメーションについて
 https://www.webcreatorbox.com/tech/css3-animation-colour */
-@-webkit-keyframes bg-color {
-	0% {opacity: 0} /*アニメーション開始時は不透明度0%*/
-	20% {opacity: 0}
-  100% {opacity: 1} /*アニメーション終了時は不透明度100%*/
-  /* 0% { color: #e74c3c; }
-  20% { color: #f1c40f; }
-  40% { color: #1abc9c; }
-  60% { color: #3498db; }
-  80% { color: #9b59b6; }
-  100% { color: #e74c3c; } */
-}
-@keyframes bg-color {
+
+@keyframes fade-in {
 	0% {
 		opacity: 0;
-		transform: translate3d(0, -20px, 0);
+		transform: translate3d(0, 20px, 0);
 	} /*アニメーション開始時は不透明度0%*/
 	20% {
 		opacity: 0;
-		transform: translate3d(0, -20px, 0);
+		transform: translate3d(0, 20px, 0);
 	} /*アニメーション開始時は不透明度0%*/
 
   100% {
@@ -326,11 +342,50 @@ https://www.webcreatorbox.com/tech/css3-animation-colour */
   80% { color: #9b59b6; }
   100% { color: #e74c3c; } */
 }
-.activeSection h1{
-  animation: bg-color 1.5s;
-  -webkit-animation: bg-color 1.5s;
+.activeSection {
+  animation: fade-in 1.5s;
+	opacity: 1;
+	position: fixed;
+  top: 30px;
+  left: 0;
+  width: 100%;
+  height: 95px;
+  font-size: 20px;
+  z-index: 100;
+
 }
-.activeSection p{
-	animation: fadeIn 0.2s ease 0.3s 1 normal;
+
+@keyframes fade-out {
+	0% {opacity: 1;
+		transform: translate3d(0, 0, 0);
+	} /*アニメーション開始時は不透明度0%*/
+	20% {
+		opacity: 1;
+		transform: translate3d(0, 0, 0);
+	} /*アニメーション開始時は不透明度0%*/
+
+  100% {
+		opacity: 0;
+		transform: translate3d(0, -20px, 0);
+		
+		} /*アニメーション終了時は不透明度100%*/
+  /* 0% { color: #e74c3c; }
+  20% { color: #f1c40f; }
+  40% { color: #1abc9c; }
+  60% { color: #3498db; }
+  80% { color: #9b59b6; }
+  100% { color: #e74c3c; } */
 }
+.nonActiveSection {
+	animation: fade-out 1.5s;
+	opacity: 0;
+	position: fixed;
+  top: 30px;
+  left: 0;
+  width: 100%;
+  height: 95px;
+  font-size: 20px;
+  z-index: 100;
+}
+
 </style>
