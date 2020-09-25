@@ -135,6 +135,7 @@ export default {
 			newActiveIndex.classList.add("activeSection");
 		}
 
+
 		/**
 		 * ページネーションのボタンをクリックした時に各セクションに飛ぶ関数
 		 * @param 
@@ -205,6 +206,9 @@ export default {
 	box-sizing: border-box;
 }
 
+#section2Logo {
+	color: #fcfcfc;
+}
 h1 {
 	margin-bottom: 1.8em;
 }
